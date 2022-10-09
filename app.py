@@ -1,10 +1,21 @@
+import sys
 from flask import Flask
+from housing.logger import logging
+from housing.exception import HousingException
+import sys
+app=Flask(__name__)
 
 app=Flask(__name__)
 
 @app.route("/",methods=['GET','POST'])
 def index():
-    return "Starting Machine Learning Project"
+    try:
+        raise Exception("We are testing custome exception")
+    except Exception as e:
+            housing = HousingException(e,sys)
+            logging.info(housing.error_message)
+            logging.info("We are testing logging module")
+    return "CI CD pipeline has been established"
 
 
 if __name__=="__main__":
